@@ -1,0 +1,29 @@
+<library path="lib/libbinary_logger">
+  <class name="itia/JointStateBinaryLogger" type="itia::logger::JointStateBinaryLogger" base_class_type="nodelet::Nodelet">
+  <description>
+    Joint state binary logger
+  </description>
+  </class>
+  <class name="itia/PoseStampedBinaryLogger" type="itia::logger::PoseStampedBinaryLogger" base_class_type="nodelet::Nodelet">
+  <description>
+    PoseStamped binary logger
+  </description>
+  </class>
+  <class name="itia/WrenchStampedBinaryLogger" type="itia::logger::WrenchStampedBinaryLogger" base_class_type="nodelet::Nodelet">
+  <description>
+    WrenchStamped binary logger
+  </description>
+  </class>  
+  <class name="itia/Float64MultiArrayBinaryLogger" type="itia::logger::Float64MultiArrayBinaryLogger" base_class_type="nodelet::Nodelet">
+  <description>
+    Float64MultiArray binary logger
+  </description>
+  </class>  
+  <class name="itia/ImuBinaryLogger" type="itia::logger::ImuBinaryLogger" base_class_type="nodelet::Nodelet">
+  <description>
+    Imu binary logger
+  </description>
+  </class>  
+</library>
+
+
