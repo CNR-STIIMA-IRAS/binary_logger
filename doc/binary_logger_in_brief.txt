@@ -1,0 +1,56 @@
+
+We would like to announce the release of the new ROS binary_logger package. 
+
+The package is designed to be an alternative to rosbag when:
+1) multiple and long messages acquisitions are required
+2) only the offline data analysis is necessary (e.g. offline data analysis with MATLAB) and no experiment reproduction is needed in ROS 
+
+The usage of a "pure" binary files allows to reduce the dimensions of the log files (if compared to a .bag file) and allows to speed up the post processing of such files.
+
+EXAMPLE
+The results provided from the log of 10 minutes of a JointState message as:
+
+header: 
+  seq: 16505
+  stamp: 
+    secs: 1486559122
+    nsecs: 461230839
+  frame_id: ''
+name: ['joint_0', 'joint_1', 'joint_2', 'joint_3', 'joint_4', 'joint_5']
+position: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+velocity: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+effort: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+
+provides the following results:
+
+1) size of the recorded files: 
+   	- 180.0MB for the .bag file 
+	- 91.0MB fot the .bin file
+
+2) time to load the files in MATLAB: 
+	- 8.215872 [s] for the .bag file 
+	- 0.391143 [s] for the .bin file
+
+
+PROS:
+- the binary_logger package save a "pure" binary file without extra information (.bag files contains also additional information such as header, etc. )
+- the binary_logger is specifically devised for the offline data analysis
+- the binary_logger output file can be loaded as a simple matrix, while the .bag file contains also strings and extra information
+
+CONS:
+- the binary file can't be reproduced
+
+
+The binary_logger package allows to record some common ROS message such as: sensor_msgs/Imu, sensor_msgs/JointState, geometry_msgs/WrenchStamped, etc... 
+
+To acquire a new topic it is only required to define the topics characteristics (message type, duration, decimation) and the binary file characteristics (binary file name, path) into the cfg file (further information and instructions are reported into the cfg file);
+
+New message types can be easily added and the users are encouraged to contribute (the README.md describes how to include new message type).
+Two MATLAB scripts are also provided to unpack the binary file.
+
+You can find the code here: https://github.com/CNR-ITIA-IRAS/binary_logger
+More information and a short description can be found in the repository.
+
+Contacts: Manuel Beschi manuel.beschi@itia.cnr.it - Enrico Villagrossi enrico.villagrossi@itia.cnr.it
+
+

@@ -33,7 +33,7 @@ The package has been tested with ROS 'Jade' and 'Kinetic'.
 
 To acquire a new topic it is required to:
 
-1) define the topics characteristics and the binary file name into the 'cfg/binary_logger_cfg.yaml' (further information are reported inside the file);
+1) define the topics characteristics (message type, duration, decimation) and the binary file characteristics (binary file name, path) into the 'cfg/binary_logger_cfg.yaml' (further information are reported inside the file);
 
 2) launch the file 'launch/binary_logger.launch' to start to record the data (NOTE: if the topic is not available, the logger will wait for the topic);
 
@@ -57,6 +57,46 @@ To add new message type it is required to:
 NOTE: the new .cpp need to be added to the CMakeLists.txt;
 
 3) add the new message type to the 'binary_logger_plugins.xml';
+
+
+# Example
+
+The results provided from the log of 10 minutes of a JointState message as:
+
+header:
+
+  seq: 16505
+  
+  stamp: 
+  
+    secs: 1486559122
+    
+    nsecs: 461230839
+    
+  frame_id: ''
+  
+name: ['joint_0', 'joint_1', 'joint_2', 'joint_3', 'joint_4', 'joint_5']
+
+position: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+
+velocity: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+
+effort: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+
+
+provides the following results:
+
+1) size of the recorded files: 
+
+  - 180.0MB for the .bag file 
+    
+  - 91.0MB fot the .bin file
+
+2) time to load the files in MATLAB: 
+
+  - 8.215872 [s] for the .bag file 
+
+  - 0.391143 [s] for the .bin file
 
 
 # Developers Contacts
