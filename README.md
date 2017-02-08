@@ -64,24 +64,19 @@ NOTE: the new .cpp need to be added to the CMakeLists.txt;
 The results provided from the log of 10 minutes of a JointState message as:
 
 header:
+>
+> seq: 16505  
+> stamp:
+> >
+> > secs: 1486559122   
+> > nsecs: 461230839 
+>
+> frame_id: '' 
 
-  seq: 16505
-  
-  stamp: 
-  
-    secs: 1486559122
-    
-    nsecs: 461230839
-    
-  frame_id: ''
-  
-name: ['joint_0', 'joint_1', 'joint_2', 'joint_3', 'joint_4', 'joint_5']
-
-position: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
-
-velocity: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
-
-effort: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+name: ['joint_0', 'joint_1', 'joint_2', 'joint_3', 'joint_4', 'joint_5']   
+position: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]   
+velocity: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]   
+effort: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]   
 
 
 provides the following results:
