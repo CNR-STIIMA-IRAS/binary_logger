@@ -4,7 +4,7 @@
   <version>0.0.0</version>
   <description>The binary_logger package</description>
 
-  <maintainer email="maxwell@todo.todo">maxwell</maintainer>
+  <maintainer email="iras@itia.cnr.it">maxwell</maintainer>
 
   <license>TODO</license>
   <buildtool_depend>catkin</buildtool_depend>
