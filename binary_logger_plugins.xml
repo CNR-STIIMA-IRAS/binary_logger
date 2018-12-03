@@ -15,9 +15,14 @@
   </description>
   </class>  
   <class name="itia/Float64MultiArrayBinaryLogger" type="itia::logger::Float64MultiArrayBinaryLogger" base_class_type="nodelet::Nodelet">
-  <description>
-    Float64MultiArray binary logger
-  </description>
+    <description>
+      Float64MultiArray binary logger
+    </description>
+  </class>  
+  <class name="itia/Float64BinaryLogger" type="itia::logger::Float64BinaryLogger" base_class_type="nodelet::Nodelet">
+    <description>
+      Float64MultiArray binary logger
+    </description>
   </class>  
   <class name="itia/ImuBinaryLogger" type="itia::logger::ImuBinaryLogger" base_class_type="nodelet::Nodelet">
   <description>
