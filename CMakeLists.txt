@@ -8,11 +8,12 @@ find_package(catkin REQUIRED COMPONENTS
   sensor_msgs
   std_msgs
   nodelet
+  tf
 )
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES binary_logger
-  CATKIN_DEPENDS geometry_msgs roscpp sensor_msgs std_msgs
+  CATKIN_DEPENDS geometry_msgs roscpp sensor_msgs std_msgs tf
   #DEPENDS system_lib
 )
 
@@ -28,9 +29,13 @@ add_library(binary_logger
   src/${PROJECT_NAME}/float64_multiarray_logger.cpp
   src/${PROJECT_NAME}/float64_logger.cpp
   src/${PROJECT_NAME}/imu_logger.cpp
+  src/${PROJECT_NAME}/tf_logger.cpp
 )
 
 add_dependencies(binary_logger ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(binary_logger
+  ${catkin_LIBRARIES}
+)
 
 add_executable(logger_start src/logger_start_node.cpp)
 add_dependencies(logger_start  ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})

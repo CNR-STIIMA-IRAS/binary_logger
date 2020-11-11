@@ -51,13 +51,14 @@
 
 #include <boost/graph/graph_concepts.hpp>
 #include <geometry_msgs/PoseStamped.h>
+#include <tf/transform_listener.h>
 
 namespace itia
 {
 namespace logger
 {  
 
-class PoseStampedBinaryLogger : public nodelet::Nodelet
+class TfBinaryLogger : public nodelet::Nodelet
 {
 public:
   virtual void onInit();
@@ -66,8 +67,12 @@ protected:
   std::ofstream m_file;
   
   std::unique_ptr<char[]> m_buf;
-  ros::Subscriber m_sub;
-  
+
+  tf::TransformListener listener;
+
+  std::string base_frame;
+  std::string tool_frame;
+
   double m_duration;
   bool m_stop;
   
@@ -82,9 +87,8 @@ protected:
   std::thread m_log_thread;
   
   void log();
-  void Callback(const geometry_msgs::PoseStampedConstPtr& msg);
-  ~PoseStampedBinaryLogger();
-  
+  ~TfBinaryLogger();
+
 };
 
 

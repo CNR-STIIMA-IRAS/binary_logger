@@ -29,6 +29,11 @@
     Imu binary logger
   </description>
   </class>  
+  <class name="itia/TfBinaryLogger" type="itia::logger::TfBinaryLogger" base_class_type="nodelet::Nodelet">
+  <description>
+    Imu binary logger
+  </description>
+  </class>
 </library>
 
 
