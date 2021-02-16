@@ -26,6 +26,7 @@ add_library(binary_logger
   src/${PROJECT_NAME}/joint_state_logger.cpp
   src/${PROJECT_NAME}/pose_stamped_logger.cpp
   src/${PROJECT_NAME}/wrench_stamped_logger.cpp
+  src/${PROJECT_NAME}/twist_stamped_logger.cpp
   src/${PROJECT_NAME}/float64_multiarray_logger.cpp
   src/${PROJECT_NAME}/float64_logger.cpp
   src/${PROJECT_NAME}/imu_logger.cpp
