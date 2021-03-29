@@ -54,6 +54,10 @@ if isempty(f)
   error(sprintf('no file %s exist',filename))
 end
 fid=fopen(filename);
+if (f.bytes==0)
+    data=[];
+    return;
+end
 n_rows=f.bytes/8/n_cols;
 data=fread(fid,[n_cols,n_rows],'double')';
 fclose(fid);
