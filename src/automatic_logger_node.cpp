@@ -73,7 +73,7 @@ int main(int argc, char **argv)
   std::string manager_name;
   if (!nh.getParam("binary_logger/manager_name", manager_name))
   {
-    ROS_ERROR("binary_logger/manager_name NOT FOUND");
+    ROS_ERROR("Parameter 'binary_logger/manager_name NOT FOUND'. Make sure that it exists. Exiting.");
     return -1;
   }
   start_new=false;
@@ -86,7 +86,7 @@ int main(int argc, char **argv)
   
   if (!list_logger_srv.waitForExistence(ros::Duration(5)))
   {
-    ROS_ERROR("Manager '%s' is not found", manager_name.c_str());
+    ROS_ERROR("Manager '%s' is not found. Exiting.", manager_name.c_str());
     return -1;
   }
   ros::ServiceServer start_log = nh.advertiseService("start_log",start_log_cb);
@@ -106,7 +106,7 @@ int main(int argc, char **argv)
       std::vector<std::string> unstoppable_nodelets;
       if (!nh.getParam("binary_logger/unstoppable_nodelets", unstoppable_nodelets))
       {
-        ROS_ERROR("binary_logger/unstoppable_nodelets NOT FOUND");
+        ROS_ERROR("Parameter 'binary_logger/unstoppable_nodelets' NOT FOUND. Make sure that it exists. Exiting.");
         return false;
       }
       
@@ -141,7 +141,7 @@ int main(int argc, char **argv)
       std::string test_name;
       if (!nh.getParam("binary_logger/test_name", test_name))
       {
-        ROS_ERROR("binary_logger/test_name NOT FOUND");
+        ROS_ERROR("Parameter 'binary_logger/test_name' NOT FOUND. Make sure that it exists. Exiting.");
         return false;
       }
       
@@ -150,19 +150,19 @@ int main(int argc, char **argv)
       if (!nh.getParam("binary_logger/test_path", test_path))
       {
         test_path=( boost::filesystem::current_path().string() );
-        ROS_INFO("binary_logger/test_path NOT FOUND, select PWD = '%s'",test_path.c_str());
+        ROS_INFO("Parameter 'binary_logger/test_path' NOT FOUND, select PWD = '%s'",test_path.c_str());
       }
       if (!test_path.compare(""))
       {
         test_path=( boost::filesystem::current_path().string() );
-        ROS_INFO("binary_logger/test_path VOID, select PWD = '%s'",test_path.c_str());
+        ROS_INFO("Test 'binary_logger/test_path' is VOID, select PWD = '%s'",test_path.c_str());
       }
       
       
       std::vector<std::string> topic_type;
       if (!nh.getParam("binary_logger/topic_type", topic_type))
       {
-        ROS_ERROR("binary_logger/topic_type NOT FOUND");
+        ROS_ERROR("Parameter 'binary_logger/topic_type' NOT FOUND. Make sure that it exists. Exiting.");
         return false;
       }
       
@@ -177,17 +177,17 @@ int main(int argc, char **argv)
         
         if (!nh.getParam("binary_logger/"+topic_type.at(idx)+"/topic_names", topic_names))
         {
-          ROS_ERROR("binary_logger/%s/topic_names NOT FOUND", topic_type.at(idx).c_str());
+          ROS_ERROR("Parameter 'binary_logger/%s/topic_names' NOT FOUND. Make sure that it exists. Exiting.", topic_type.at(idx).c_str());
           return false;
         }
         if (!nh.getParam("binary_logger/"+topic_type.at(idx)+"/duration", duration))
         {
-          ROS_ERROR("binary_logger/%s/duration NOT FOUND", topic_type.at(idx).c_str());
+          ROS_ERROR("Parameter 'binary_logger/%s/duration' NOT FOUND. Make sure that it exists. Exiting.", topic_type.at(idx).c_str());
           return false;
         }
         if (!nh.getParam("binary_logger/"+topic_type.at(idx)+"/decimation", decimation))
         {
-          ROS_ERROR("binary_logger/%s/decimation NOT FOUND", topic_type.at(idx).c_str());
+          ROS_ERROR("Parameter 'binary_logger/%s/decimation' NOT FOUND. Make sure that it exists. Exiting.", topic_type.at(idx).c_str());
           return false;
         }
         nodelet_type = "itia/"+topic_type.at(idx)+"BinaryLogger";
