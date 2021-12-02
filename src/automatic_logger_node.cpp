@@ -3,7 +3,7 @@
  *
  * Authors: Manuel Beschi (manuel.beschi@itia.cnr.it)
  *          Enrico Villagrossi (enrico.villagrossi@itia.cnr.it)
- *          
+ *
  *
  * Software License Agreement (BSD License)
  *
@@ -20,8 +20,8 @@
  *     copyright notice, this list of conditions and the following
  *     disclaimer in the documentation and/or other materials provided
  *     with the distribution.
- *   * Neither the name of the National Research Council of Italy nor the 
- *     names of its contributors may be used to endorse or promote products 
+ *   * Neither the name of the National Research Council of Italy nor the
+ *     names of its contributors may be used to endorse or promote products
  *     derived from this software without specific prior written permission.
  *
  *  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
@@ -61,7 +61,7 @@ bool stop_log_cb(std_srvs::Empty::Request& req, std_srvs::Empty::Response& res)
 
 bool start_log_cb(std_srvs::Empty::Request& req, std_srvs::Empty::Response& res)
 {
-  start_new=true; 
+  start_new=true;
   return true;
 }
 
@@ -69,7 +69,7 @@ int main(int argc, char **argv)
 {
   ros::init(argc, argv, "automatic_logger_start");
   ros::NodeHandle nh;
-  
+
   std::string manager_name;
   if (!nh.getParam("binary_logger/manager_name", manager_name))
   {
@@ -79,11 +79,11 @@ int main(int argc, char **argv)
   start_new=false;
   stop_new=false;
 
-  
+
   ros::ServiceClient list_logger_srv = nh.serviceClient<nodelet::NodeletList>(manager_name+"/list");
   ros::ServiceClient load_logger_srv = nh.serviceClient<nodelet::NodeletLoad>(manager_name+"/load_nodelet");
   ros::ServiceClient unload_logger_srv = nh.serviceClient<nodelet::NodeletUnload>(manager_name+"/unload_nodelet");
-  
+
   if (!list_logger_srv.waitForExistence(ros::Duration(5)))
   {
     ROS_ERROR("Manager '%s' is not found", manager_name.c_str());
@@ -109,11 +109,11 @@ int main(int argc, char **argv)
         ROS_ERROR("binary_logger/unstoppable_nodelets NOT FOUND");
         return false;
       }
-      
+
       list_logger_srv.call(nodelet_list);
       if (nodelet_list.response.nodelets.size()>0)
         ROS_INFO("%zu logger threads will be stopped", nodelet_list.response.nodelets.size());
-      
+
       for (int idx = 0;idx < nodelet_list.response.nodelets.size();idx++)
       {
         bool do_stop = true;
@@ -122,7 +122,7 @@ int main(int argc, char **argv)
           if ( !nodelet_list.response.nodelets.at(idx).compare(unstoppable_nodelets.at(idx2) ) )
             do_stop=false;
         }
-        
+
         if (do_stop)
         {
           nodelet_unload.request.name = nodelet_list.response.nodelets.at(idx);
@@ -133,7 +133,7 @@ int main(int argc, char **argv)
       }
 
     }
-    
+
     if (start_new)
     {
 
@@ -144,8 +144,18 @@ int main(int argc, char **argv)
         ROS_ERROR("binary_logger/test_name NOT FOUND");
         return false;
       }
-      
-      
+
+      bool append_time;
+      if (!nh.getParam("binary_logger/append_time",append_time))
+        append_time=false;
+
+
+      if (append_time)
+      {
+        ros::Time t0=ros::Time::now();
+        test_name+="_"+std::to_string(t0.toSec());
+        ROS_INFO("TEST NAME = %s",test_name.c_str());
+      }
       std::string test_path;
       if (!nh.getParam("binary_logger/test_path", test_path))
       {
@@ -157,24 +167,24 @@ int main(int argc, char **argv)
         test_path=( boost::filesystem::current_path().string() );
         ROS_INFO("binary_logger/test_path VOID, select PWD = '%s'",test_path.c_str());
       }
-      
-      
+
+
       std::vector<std::string> topic_type;
       if (!nh.getParam("binary_logger/topic_type", topic_type))
       {
         ROS_ERROR("binary_logger/topic_type NOT FOUND");
         return false;
       }
-      
+
       for (int idx = 0;idx<topic_type.size();idx++)
       {
         std::vector<std::string> topic_names;
         std::vector<double> duration;
         std::vector<int> decimation;
         std::string nodelet_type;
-        
-        
-        
+
+
+
         if (!nh.getParam("binary_logger/"+topic_type.at(idx)+"/topic_names", topic_names))
         {
           ROS_ERROR("binary_logger/%s/topic_names NOT FOUND", topic_type.at(idx).c_str());
@@ -191,7 +201,7 @@ int main(int argc, char **argv)
           return false;
         }
         nodelet_type = "itia/"+topic_type.at(idx)+"BinaryLogger";
-        
+
         for (int iT = 0;iT<topic_names.size();iT++)
         {
           nodelet_load.request.name = topic_names.at(iT);
@@ -208,8 +218,8 @@ int main(int argc, char **argv)
             ROS_ERROR("Fail calling '%s' logger ", topic_names.at(iT).c_str());
           }
         }
-      } 
+      }
     }
-  } 
+  }
   return 0;
 }

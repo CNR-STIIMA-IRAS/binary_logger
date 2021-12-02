@@ -75,15 +75,14 @@ namespace itia
       }
     }
 
-
     if (!getPrivateNodeHandle().getParam(m_topic_name+"/base_frame",base_frame))
     {
-      ROS_ERROR("%s/%s/base_frame is not defined",getPrivateNodeHandle().getNamespace().c_str(),m_topic_name.c_str());
+      ROS_ERROR("%s/base_frame is not defined",m_topic_name.c_str());
       return;
     }
     if (!getPrivateNodeHandle().getParam(m_topic_name+"/tool_frame",tool_frame))
     {
-      ROS_ERROR("%s/%s/tool_frame is not defined",getPrivateNodeHandle().getNamespace().c_str(),m_topic_name.c_str());
+      ROS_ERROR("%s/tool_frame is not defined",m_topic_name.c_str());
       return;
     }
     ROS_DEBUG("Starting logging topic '%s' in file named '%s'",  m_topic_name.c_str(), m_file_name.c_str()   );
