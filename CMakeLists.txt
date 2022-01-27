@@ -50,3 +50,12 @@ add_dependencies(automatic_logger_node  ${${PROJECT_NAME}_EXPORTED_TARGETS} ${ca
 target_link_libraries(automatic_logger_node
   ${catkin_LIBRARIES}
 )
+
+install(TARGETS binary_logger logger_start automatic_logger_node
+        ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+        LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+        RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
+install(FILES binary_logger_plugins.xml DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+
